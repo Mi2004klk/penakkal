@@ -12,6 +12,14 @@ export async function getAllArticles(): Promise<Article[]> {
   const fileContent = await fs.readFile(dataPath, 'utf-8');
   const articles: Article[] = JSON.parse(fileContent);
   
+  // Clean up corrupted author data (some WordPress authors are entire paragraphs)
+  // Truncating to 25 chars ensures the URL-encoded slug stays safely under the 255-byte file system limit
+  articles.forEach(a => {
+    if (a.author && a.author.length > 25) {
+      a.author = a.author.substring(0, 25).trim() + "...";
+    }
+  });
+  
   // Sort by date descending
   cachedArticles = articles.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
   return cachedArticles;
