@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { 
   Noto_Serif_Tamil, 
   Noto_Sans_Tamil, 
@@ -91,6 +91,9 @@ export const metadata: Metadata = {
     apple: "/favicon.png",
   },
   manifest: "/manifest.json",
+};
+
+export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#fcf7ed" },
     { media: "(prefers-color-scheme: dark)", color: "#171717" },
