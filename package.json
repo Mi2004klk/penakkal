@@ -30,7 +30,7 @@
     "html-to-text": "^9",
     "lucide-react": "^0.500",
     "next": "^16.3.4",
-    "next-mdx-remote": "^5",
+    "next-mdx-remote": "^6.0.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "reading-time": "^1",
