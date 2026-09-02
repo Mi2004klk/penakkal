@@ -13,10 +13,13 @@ export async function getAllArticles(): Promise<Article[]> {
   const articles: Article[] = JSON.parse(fileContent);
   
   // Clean up corrupted author data (some WordPress authors are entire paragraphs)
-  // Truncating to 25 chars ensures the URL-encoded slug stays safely under the 255-byte file system limit
+  // Strip newlines and invalid filesystem characters that break Next.js static prerendering
   articles.forEach(a => {
-    if (a.author && a.author.length > 25) {
-      a.author = a.author.substring(0, 25).trim() + "...";
+    if (a.author) {
+      a.author = a.author.replace(/[\r\n*?:"<>|\\/]/g, ' ').replace(/\s+/g, ' ').trim();
+      if (a.author.length > 25) {
+        a.author = a.author.substring(0, 25).trim() + "...";
+      }
     }
   });
   
