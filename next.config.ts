@@ -6,9 +6,7 @@ const nextConfig: NextConfig = {
     unoptimized: true, // We pre-optimized images using sharp in download-media.mjs
   },
   trailingSlash: true,
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+
 };
 
 export default nextConfig;
