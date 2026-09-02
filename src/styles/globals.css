@@ -1,0 +1,507 @@
+@import "tailwindcss";
+
+@theme {
+  /* DESIGN.md Colors */
+  --color-forest-stage: #0d542b;
+  --color-lime-sprout: #b9ff78;
+  --color-ember-coral: #f54320;
+  --color-coral-whisper: #ffe3e3;
+  --color-cream-paper: #fcf7ed;
+  --color-true-black: #000000;
+  --color-midnight-ink: #1c1917;
+  --color-stone: #44403b;
+  --color-slate: #292524;
+  --color-ash: #d6d3d1;
+  --color-fog: #e5e7eb;
+  --color-pure-white: #ffffff;
+  --color-moss: #008236;
+
+  /* Semantic Color Replacements (Migrated from primary/accent palettes) */
+  --color-primary-green: var(--color-moss);
+  --color-primary-green-light: oklch(0.97 0.02 155);
+  --color-primary-green-dark: var(--color-forest-stage);
+
+  /* DESIGN.md Surfaces */
+  --surface-forest-stage: var(--color-forest-stage);
+  --surface-cream-paper: var(--color-cream-paper);
+  --surface-pure-white-card: var(--color-pure-white);
+  --surface-coral-whisper: var(--color-coral-whisper);
+
+  --color-surface-forest-stage: var(--color-forest-stage);
+  --color-surface-cream-paper: var(--color-cream-paper);
+  --color-surface-pure-white-card: var(--color-pure-white);
+  --color-surface-coral-whisper: var(--color-coral-whisper);
+  --color-surface-page: var(--color-cream-paper);
+  --color-surface-card: var(--color-pure-white);
+  --color-surface-alt: #f5f0e6;
+  
+  --color-border-default: var(--color-ash);
+  --color-border-subtle: var(--color-fog);
+  --color-border-hover: var(--color-moss);
+
+  /* Text Colors */
+  --color-heading: var(--color-true-black);
+  --color-body-text: var(--color-stone);
+  --color-muted-text: #78716c;
+  --color-text-link: var(--color-moss);
+  --color-text-link-hover: var(--color-forest-stage);
+  --color-error: var(--color-ember-coral);
+  --color-success: var(--color-moss);
+
+  /* Fonts */
+  --font-display: var(--font-gt-alpina-condensed), 'Playfair Display', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-body: var(--font-gt-america-standard), 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-ui: var(--font-gt-america-extended), 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-condensed: var(--font-gt-america-condensed), 'Barlow Condensed', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-tamil: var(--font-noto-serif-tamil), 'Tamil Sangam MN', 'Latha', serif;
+  --font-arabic: var(--font-noto-naskh-arabic), 'Amiri', serif;
+  --font-quran: var(--font-amiri-quran), 'Noto Naskh Arabic', serif;
+  --font-tamil-sans: var(--font-noto-sans-tamil), system-ui, sans-serif;
+
+  /* Typography Scales */
+  --text-caption: 10px;
+  --text-body-sm: 14px;
+  --text-body: 16px;
+  --text-subheading: 20px;
+  --text-heading-sm: 24px;
+  --text-heading: clamp(24px, 4vw, 30px);
+  --text-heading-lg: clamp(28px, 5vw, 38px);
+  --text-display: clamp(40px, 8vw, 96px);
+  
+  /* Font Weights */
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+
+  /* Line Heights */
+  --leading-caption: 1;
+  --leading-body-sm: 1.43;
+  --leading-body: 1.5;
+  --leading-subheading: 1.5;
+  --leading-heading-sm: 1.33;
+  --leading-heading: 1.38;
+  --leading-heading-lg: 1.38;
+  --leading-display: 1.08;
+
+  /* Tracking (Letter Spacing) */
+  --tracking-body: -0.007px;
+  --tracking-subheading: -0.14px;
+  --tracking-heading-sm: -0.17px;
+  --tracking-heading: -0.21px;
+  --tracking-heading-lg: -0.95px;
+  --tracking-display: 0px;
+
+  /* Spacing Scale */
+  --spacing-8: 8px;
+  --spacing-16: 16px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+  --spacing-64: 64px;
+  --spacing-104: 104px;
+
+  /* Layout */
+  --page-max-width: 1200px;
+  --section-gap: 64px;
+  --card-padding: 24px;
+  --element-gap: 16px;
+  --header-height: 64px;
+  --z-header: 40;
+  --z-progress: 45;
+  --z-modal: 100;
+  --z-toast: 110;
+
+  /* Shadows */
+  --shadow-card: none;
+  --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.04);
+  --shadow-hover: var(--shadow-card-hover);
+  --shadow-modal: 0 10px 30px -12px oklch(0 0 0 / 0.10);
+  --shadow-product-frame: 0 24px 48px rgba(245, 67, 32, 0.15);
+  --shadow-halo: 0 0 0 4px rgba(185, 255, 120, 0.25);
+
+  /* Radius */
+  --radius-cards: 8px;
+  --radius-buttons: 8px;
+  --radius-chips: 9999px;
+  --radius-productframes: 24px;
+  --radius-pills: 9999px;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Custom Tailwind Utilities for v4 */
+@utility font-arabic {
+  font-family: var(--font-arabic);
+}
+@utility font-tamil {
+  font-family: var(--font-tamil);
+}
+@utility font-quran {
+  font-family: var(--font-quran);
+}
+@utility font-display {
+  font-family: var(--font-display);
+}
+@utility font-body {
+  font-family: var(--font-body);
+}
+@utility font-ui {
+  font-family: var(--font-ui);
+}
+@utility hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer base {
+  body {
+    background-color: var(--color-surface-page);
+    color: var(--color-body-text);
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    letter-spacing: var(--tracking-body);
+    font-feature-settings: 'cv11';
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--header-height);
+  }
+
+  /* Transition moved off html to specific classes where needed */
+
+  ::selection {
+    background-color: var(--color-lime-sprout);
+    color: var(--color-forest-stage);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-heading);
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-moss);
+    outline-offset: 2px;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+.dark {
+  --color-surface-forest-stage: var(--color-moss);
+  --color-surface-cream-paper: #171717;
+  --color-surface-pure-white-card: #212121;
+  --color-surface-coral-whisper: #262626;
+  --color-surface-page: #121212;
+  --color-surface-card: #1e1e1e;
+  
+  --color-border-default: #333333;
+  --color-border-subtle: #2a2a2a;
+  --color-border-hover: var(--color-lime-sprout);
+
+  --color-heading: oklch(0.95 0.01 80);
+  --color-body-text: oklch(0.85 0.01 80);
+  --color-muted-text: oklch(0.75 0.01 80);
+  
+  --color-text-link: var(--color-lime-sprout);
+  --color-text-link-hover: var(--color-cream-paper);
+}
+
+.dark *:focus-visible {
+  outline-color: var(--color-lime-sprout);
+}
+
+/* Zone Utilities */
+.zone-forest {
+  background-color: var(--color-surface-forest-stage);
+  color: var(--color-cream-paper);
+}
+
+.zone-forest h1, .zone-forest h2, .zone-forest h3, .zone-forest h4, .zone-forest h5, .zone-forest h6 {
+  color: var(--color-lime-sprout);
+}
+
+.zone-cream {
+  background-color: var(--color-surface-cream-paper);
+  color: var(--color-stone);
+}
+
+.zone-cream h1, .zone-cream h2, .zone-cream h3, .zone-cream h4, .zone-cream h5, .zone-cream h6 {
+  color: var(--color-true-black);
+}
+
+/* Component Styles */
+.btn-lime {
+  background-color: var(--color-lime-sprout);
+  color: var(--color-midnight-ink);
+  font-family: var(--font-ui);
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-regular);
+  padding: 12px 24px;
+  border-radius: var(--radius-buttons);
+  border: none;
+  transition: transform var(--transition-base), filter var(--transition-base), box-shadow var(--transition-base);
+}
+
+.btn-lime:hover, .btn-lime:focus-visible {
+  transform: scale(1.02);
+  filter: brightness(1.05);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-midnight-ink);
+  font-family: var(--font-ui);
+  font-size: var(--text-body);
+  padding: 12px 24px;
+  border-radius: var(--radius-buttons);
+  border: 1.5px solid var(--color-midnight-ink);
+  transition: all var(--transition-base);
+}
+
+.btn-ghost:hover {
+  background-color: var(--color-midnight-ink);
+  color: var(--color-cream-paper);
+}
+
+.dark .btn-ghost {
+  color: var(--color-cream-paper);
+  border-color: var(--color-cream-paper);
+}
+
+.dark .btn-ghost:hover {
+  background-color: var(--color-cream-paper);
+  color: var(--color-midnight-ink);
+}
+
+.section-eyebrow {
+  font-family: var(--font-condensed);
+  font-weight: var(--font-weight-regular);
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-midnight-ink);
+  position: relative;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+.dark .section-eyebrow {
+  color: var(--color-cream-paper);
+}
+
+.wavy-underline {
+  position: relative;
+}
+
+.wavy-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60%;
+  height: 4px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 4' preserveAspectRatio='none'%3E%3Cpath d='M0,2 Q5,4 10,2 T20,2' fill='none' stroke='%23f54320' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 20px 4px;
+}
+
+.editorial-headline {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-heading);
+  line-height: var(--leading-display);
+  font-size: var(--text-display);
+}
+
+.editorial-headline.lime {
+  color: var(--color-lime-sprout);
+}
+
+.prose {
+  font-family: var(--font-tamil);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+  text-rendering: optimizeLegibility;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.prose h2 {
+  font-family: var(--font-display);
+  color: var(--color-heading);
+  border-bottom: 2px solid var(--color-primary-green-light);
+  padding-bottom: 0.5rem;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  font-size: var(--text-heading-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.dark .prose h2 {
+  border-bottom-color: var(--color-border-subtle);
+}
+
+.prose h3 {
+  font-family: var(--font-display);
+  color: var(--color-body-text);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: var(--text-subheading);
+  font-weight: var(--font-weight-bold);
+}
+
+.prose p {
+  margin-bottom: 1.25rem;
+}
+
+.prose a {
+  color: var(--color-text-link);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all var(--transition-fast);
+}
+
+.prose a:hover {
+  color: var(--color-text-link-hover);
+  border-bottom-color: var(--color-text-link-hover);
+}
+
+.prose blockquote {
+  border-left: 4px solid var(--color-primary-green);
+  background: var(--color-primary-green-light);
+  padding: 1.5rem 2rem;
+  font-style: normal;
+  border-radius: 0 var(--radius-cards) var(--radius-cards) 0;
+  margin: 2rem 0;
+  font-size: var(--text-subheading);
+  color: var(--color-midnight-ink);
+}
+
+.dark .prose blockquote {
+  background: var(--color-surface-pure-white-card);
+  border-left-color: var(--color-lime-sprout);
+  color: var(--color-cream-paper);
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: var(--text-body);
+}
+
+.prose table th, .prose table td {
+  padding: 1rem;
+  border: 1px solid var(--color-border-default);
+}
+
+.prose table th {
+  background-color: var(--color-surface-card);
+  font-weight: var(--font-weight-bold);
+  text-align: left;
+}
+
+.prose img {
+  border-radius: var(--radius-cards);
+  margin: 2rem auto;
+  cursor: zoom-in;
+  max-width: 100%;
+  height: auto;
+}
+
+.arabic-text {
+  font-family: var(--font-arabic);
+  direction: rtl;
+  text-align: right;
+  font-size: 1.3em;
+  line-height: 2;
+}
+
+.quran-block {
+  background: linear-gradient(135deg, var(--color-primary-green-light), var(--color-surface-cream-paper));
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-cards);
+  padding: 2.5rem 2rem;
+  margin: 2.5rem 0;
+  text-align: center;
+}
+
+.dark .quran-block {
+  background: linear-gradient(135deg, var(--color-surface-pure-white-card), var(--color-surface-alt));
+  border-color: var(--color-border-subtle);
+}
+
+.quran-verse {
+  font-family: var(--font-quran);
+  font-size: var(--text-heading-lg);
+  line-height: 2.5;
+  direction: rtl;
+  color: var(--color-primary-green-dark);
+}
+
+.dark .quran-verse {
+  color: var(--color-lime-sprout);
+}
+
+.hadith-block {
+  background: var(--color-surface-cream-paper);
+  border-left: 4px solid var(--color-ember-coral);
+  padding: 2rem;
+  margin: 2.5rem 0;
+  border-radius: 0 var(--radius-cards) var(--radius-cards) 0;
+}
+
+.dark .hadith-block {
+  background: var(--color-surface-pure-white-card);
+}
+
+/* Font Size Control */
+html[data-font-size="sm"] { font-size: 14px; }
+html[data-font-size="md"] { font-size: 16px; }
+html[data-font-size="lg"] { font-size: 18px; }
+html[data-font-size="xl"] { font-size: 20px; }
+
+/* Print Stylesheet */
+@media print {
+  body {
+    background-color: var(--color-surface-card);
+    color: var(--color-true-black);
+    font-size: 12pt;
+  }
+  header, footer, nav, aside, .no-print {
+    display: none !important;
+  }
+  .prose {
+    max-width: 100%;
+  }
+  a {
+    text-decoration: underline;
+    color: var(--color-true-black);
+  }
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+  img {
+    page-break-inside: avoid;
+  }
+}
