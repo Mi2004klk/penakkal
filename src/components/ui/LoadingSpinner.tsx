@@ -1,0 +1,12 @@
+import { Loader2 } from "lucide-react";
+
+export default function LoadingSpinner({ className = "" }: { className?: string }) {
+  return (
+    <div className={`flex flex-col items-center justify-center py-12 gap-3 ${className}`}>
+      <Loader2 className="w-8 h-8 text-text-link animate-spin opacity-80" />
+      <span className="font-ui font-bold text-muted-text animate-pulse">
+        சுமையேற்றுகிறது...
+      </span>
+    </div>
+  );
+}

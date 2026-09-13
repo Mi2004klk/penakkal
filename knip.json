@@ -1,0 +1,14 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema-json.json",
+  "ignore": [
+    "source-data/**",
+    "scripts/**"
+  ],
+  "next": {
+    "entry": [
+      "next.config.{js,ts,mjs}",
+      "src/app/**/*.{js,jsx,ts,tsx}",
+      "src/pages/**/*.{js,jsx,ts,tsx}"
+    ]
+  }
+}

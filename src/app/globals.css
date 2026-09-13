@@ -1,0 +1,547 @@
+/*
+ * globals.css Structure:
+ * 1. Tailwind base imports & plugins
+ * 2. @theme: Token definitions & color palettes
+ * 3. @utility: Custom Tailwind v4 utilities
+ * 4. @layer base: Global resets and base tag styling
+ * 5. .dark: Dark mode token overrides (theme level)
+ * 6. @layer components: Custom component and zone classes
+ */
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* DESIGN.md Colors */
+  --color-forest-stage: #0d542b;
+  --color-lime-sprout: #b9ff78;
+  --color-ember-coral: #f54320;
+  --color-cream-paper: #fcf7ed;
+  --color-true-black: #000000;
+  --color-midnight-ink: #1c1917;
+  --color-stone: #44403b;
+  --color-slate: #292524;
+  --color-ash: #d6d3d1;
+  --color-fog: #e5e7eb;
+  --color-pure-white: #ffffff;
+  --color-moss: #008236;
+
+  /* Semantic Color Replacements (Migrated from primary/accent palettes) */
+  --color-primary-green: var(--color-moss);
+  --color-primary-green-light: #e6faee;
+  --color-primary-green-dark: var(--color-forest-stage);
+
+  --color-surface-forest-stage: var(--color-forest-stage);
+  --color-surface-cream-paper: var(--color-cream-paper);
+  --color-surface-pure-white-card: var(--color-pure-white);
+  --color-surface-page: var(--color-cream-paper);
+  --color-surface-card: var(--color-pure-white);
+  --color-surface-alt: #f5f0e6;
+  --color-overlay: rgba(0, 0, 0, 0.6);
+  
+  --color-border-default: var(--color-ash);
+  --color-border-subtle: var(--color-fog);
+  --color-border-hover: var(--color-moss);
+
+  /* Text Colors */
+  --color-heading: var(--color-true-black);
+  --color-body-text: var(--color-stone);
+  --color-muted-text: #4d4843;
+  --color-text-link: var(--color-moss);
+  --color-text-link-hover: var(--color-forest-stage);
+  --color-error: var(--color-ember-coral);
+  --color-success: var(--color-moss);
+
+  /* Fonts */
+  --font-display: var(--next-font-display), 'Tamil Sangam MN', 'Latha', serif;
+  --font-body: var(--next-font-display), 'Tamil Sangam MN', 'Latha', serif;
+  --font-ui: var(--next-font-ui), system-ui, sans-serif;
+  --font-arabic: var(--next-font-arabic), 'Amiri', serif;
+  
+  /* Aliases */
+  --font-tamil: var(--font-body);
+  --font-quran: var(--font-arabic);
+
+  /* Typography Scales */
+  --text-caption: 10px;
+  --text-caption--line-height: 1;
+
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 1.43;
+
+  --text-body: 16px;
+  --text-body--line-height: 1.8;
+  --text-body--letter-spacing: -0.007px;
+
+  --text-subheading: 20px;
+  --text-subheading--line-height: 1.5;
+  --text-subheading--letter-spacing: -0.14px;
+
+  --text-heading-sm: 24px;
+  --text-heading-sm--line-height: 1.33;
+  --text-heading-sm--letter-spacing: -0.17px;
+
+  --text-heading-md: clamp(24px, 4vw, 30px);
+  --text-heading-md--line-height: 1.38;
+  --text-heading-md--letter-spacing: -0.21px;
+
+
+
+  --text-display: clamp(40px, 8vw, 96px);
+  --text-display--line-height: 1.08;
+  --text-display--letter-spacing: 0px;
+
+  --text-eyebrow: var(--text-body-sm);
+  --text-eyebrow--line-height: var(--text-body-sm--line-height);
+
+
+
+  /* Layout */
+  --page-max-width: 1200px;
+  --section-gap: 64px;
+  --header-height: 64px;
+  --z-nav: 40;
+  --z-progress: 45;
+  --z-dropdown: 60;
+  --z-drawer: 90;
+  --z-modal: 100;
+  --z-toast: 110;
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.04);
+  --shadow-dropdown: 0 4px 16px rgba(0,0,0,0.12);
+  --drop-shadow-dropdown: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-modal: 0 10px 30px -12px oklch(0 0 0 / 0.10);
+  --shadow-product-frame: 0 24px 48px rgba(245, 67, 32, 0.15);
+  --shadow-halo: 0 0 0 4px rgba(185, 255, 120, 0.25);
+
+  /* Radius */
+  --radius-cards: 8px;
+  --radius-buttons: 8px;
+  --radius-chips: 9999px;
+  --radius-productframes: 24px;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Animations */
+  --animate-fade-in-up: fade-in-up 0.8s ease-out;
+
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* Custom Tailwind Utilities for v4 */
+@utility font-arabic {
+  font-family: var(--font-arabic);
+}
+@utility font-tamil {
+  font-family: var(--font-tamil);
+}
+@utility font-quran {
+  font-family: var(--font-quran);
+}
+@utility font-display {
+  font-family: var(--font-display);
+}
+@utility font-body {
+  font-family: var(--font-body);
+}
+@utility font-ui {
+  font-family: var(--font-ui);
+}
+@utility hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+@utility touch-target {
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(100%, 44px);
+    height: max(100%, 44px);
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Z-index scale (no --z-* theme namespace exists in Tailwind v4 — these must be explicit utilities) */
+@utility z-nav { z-index: var(--z-nav); }
+@utility z-progress { z-index: var(--z-progress); }
+@utility z-dropdown { z-index: var(--z-dropdown); }
+@utility z-drawer { z-index: var(--z-drawer); }
+@utility z-modal { z-index: var(--z-modal); }
+@utility z-toast { z-index: var(--z-toast); }
+
+@layer base {
+  body {
+    background-color: var(--color-surface-page);
+    color: var(--color-body-text);
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    letter-spacing: var(--text-body--letter-spacing);
+    font-feature-settings: 'cv11';
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  html {
+    scroll-padding-top: calc(var(--header-height) + 48px);
+    color-scheme: light;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  /* Transition moved off html to specific classes where needed */
+
+  ::selection {
+    background-color: var(--color-lime-sprout);
+    color: var(--color-forest-stage);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-heading);
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-moss);
+    outline-offset: 2px;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+    }
+    .hover\:scale-105:hover, .group:hover .group-hover\:scale-105, 
+    .hover\:scale-110:hover, .group:hover .group-hover\:scale-110,
+    .hover\:-translate-y-1:hover, .group:hover .group-hover\:-translate-y-1,
+    .hover\:scale-\[1\.01\]:hover {
+      transform: none !important;
+    }
+  }
+}
+
+.dark {
+  color-scheme: dark;
+  --color-surface-forest-stage: var(--color-forest-stage);
+  --color-surface-cream-paper: #171717;
+  --color-surface-pure-white-card: #212121;
+  --color-surface-page: #121212;
+  --color-surface-card: #1e1e1e;
+  --color-surface-alt: #2a2a2a;
+  --color-overlay: rgba(0, 0, 0, 0.7);
+
+  /* Raw-palette tokens used as text/UI colors in components — must stay readable on dark surfaces */
+  --color-stone: #a8a29e;
+  --color-ash: #57534e;
+  
+  --color-border-default: #333333;
+  --color-border-subtle: #2a2a2a;
+  --color-border-hover: var(--color-lime-sprout);
+
+  --color-heading: #f3f4f6;
+  --color-body-text: #d1d5db;
+  --color-muted-text: #9ca3af;
+  
+  --color-text-link: var(--color-lime-sprout);
+  --color-text-link-hover: var(--color-cream-paper);
+  
+  --color-error: #ff8a75; /* Lighter coral for dark mode contrast */
+  --color-success: var(--color-lime-sprout);
+}
+
+.dark *:focus-visible {
+  outline-color: var(--color-lime-sprout);
+}
+
+/* Component Styles */
+@layer components {
+
+/* Zone Utilities */
+.zone-forest {
+  background-color: var(--color-surface-forest-stage);
+  color: var(--color-pure-white);
+}
+
+.zone-forest h1, .zone-forest h2, .zone-forest h3, .zone-forest h4, .zone-forest h5, .zone-forest h6 {
+  color: var(--color-lime-sprout);
+}
+
+.zone-cream {
+  background-color: var(--color-surface-cream-paper);
+  color: var(--color-body-text);
+}
+
+.zone-cream h1, .zone-cream h2, .zone-cream h3, .zone-cream h4, .zone-cream h5, .zone-cream h6 {
+  color: var(--color-heading);
+}
+
+.section-eyebrow {
+  font-family: var(--font-ui);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--text-body-sm);
+  color: var(--color-heading);
+  position: relative;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+.section-eyebrow:lang(en),
+.section-eyebrow :lang(en) {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wavy-underline {
+  position: relative;
+}
+
+.wavy-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60%;
+  height: 4px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 4' preserveAspectRatio='none'%3E%3Cpath d='M0,2 Q5,4 10,2 T20,2' fill='none' stroke='%23f54320' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 20px 4px;
+}
+
+.editorial-headline {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-heading);
+  font-size: var(--text-display);
+  line-height: var(--text-display--line-height);
+  letter-spacing: var(--text-display--letter-spacing);
+}
+
+.editorial-headline.lime {
+  color: var(--color-lime-sprout);
+}
+
+.prose {
+  font-family: var(--font-tamil);
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+  letter-spacing: var(--text-body--letter-spacing);
+  text-rendering: optimizeLegibility;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.prose h2 {
+  font-family: var(--font-display);
+  color: var(--color-heading);
+  border-bottom: 2px solid var(--color-primary-green-light);
+  padding-bottom: 0.5rem;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  font-weight: var(--font-weight-bold);
+}
+
+.dark .prose h2 {
+  border-bottom-color: var(--color-border-subtle);
+}
+
+.prose h3 {
+  font-family: var(--font-display);
+  color: var(--color-body-text);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: var(--font-weight-bold);
+}
+
+.prose p {
+  margin-bottom: 1.25rem;
+}
+
+.prose a {
+  color: var(--color-text-link);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all var(--transition-fast);
+}
+
+.prose a:hover {
+  color: var(--color-text-link-hover);
+  border-bottom-color: var(--color-text-link-hover);
+}
+
+.prose blockquote {
+  border-left: 4px solid var(--color-primary-green);
+  background: var(--color-primary-green-light);
+  padding: 1.5rem 2rem;
+  font-style: normal;
+  border-radius: 0 var(--radius-cards) var(--radius-cards) 0;
+  margin: 2rem 0;
+  font-size: var(--text-subheading);
+  color: var(--color-midnight-ink);
+}
+
+.dark .prose blockquote {
+  background: var(--color-surface-pure-white-card);
+  border-left-color: var(--color-lime-sprout);
+  color: var(--color-cream-paper);
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: var(--text-body);
+}
+
+.prose table th, .prose table td {
+  padding: 1rem;
+  border: 1px solid var(--color-border-default);
+}
+
+.prose table th {
+  background-color: var(--color-surface-card);
+  font-weight: var(--font-weight-bold);
+  text-align: left;
+}
+
+.prose img {
+  border-radius: var(--radius-cards);
+  margin: 2rem auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.arabic-text {
+  font-family: var(--font-arabic);
+  direction: rtl;
+  text-align: right;
+  font-size: 1.3em;
+  line-height: 2;
+}
+
+.quran-block {
+  background: linear-gradient(135deg, var(--color-primary-green-light), var(--color-surface-cream-paper));
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-cards);
+  padding: 2.5rem 2rem;
+  margin: 2.5rem 0;
+  text-align: center;
+}
+
+.dark .quran-block {
+  background: linear-gradient(135deg, var(--color-surface-pure-white-card), var(--color-surface-alt));
+  border-color: var(--color-border-subtle);
+}
+
+.quran-verse {
+  font-family: var(--font-quran);
+  font-size: var(--text-display);
+  line-height: 2.5;
+  direction: rtl;
+  color: var(--color-primary-green-dark);
+}
+
+.dark .quran-verse {
+  color: var(--color-lime-sprout);
+}
+
+.hadith-block {
+  background: var(--color-surface-cream-paper);
+  border-left: 4px solid var(--color-ember-coral);
+  padding: 2rem;
+  margin: 2.5rem 0;
+  border-radius: 0 var(--radius-cards) var(--radius-cards) 0;
+}
+
+.dark .hadith-block {
+  background: var(--color-surface-pure-white-card);
+}
+
+/* Custom Prose Article Styling */
+.prose-article {
+  @apply prose prose-lg md:prose-xl dark:prose-invert max-w-none w-full;
+  font-family: var(--font-body);
+  overflow-wrap: break-word;
+  word-break: normal;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 1000px;
+}
+
+.prose-article p {
+  line-height: 1.8;
+  margin-bottom: 1.5em;
+  color: var(--color-body-text);
+}
+
+.prose-article .arabic-text {
+  font-family: var(--font-quran);
+  font-size: 1.4em;
+  line-height: 2.2;
+  color: var(--color-heading);
+  display: block;
+  text-align: right;
+  margin: 1.5rem 0;
+}
+
+.prose-article img {
+  border-radius: var(--radius-cards);
+  margin: 2rem auto;
+}
+
+.prose-article iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: 0;
+  margin: 2rem 0;
+  border-radius: var(--radius-cards);
+}
+
+} /* End of @layer components */
+
+/* Font Size Control */
+html[data-font-size="sm"] { font-size: 14px; }
+html[data-font-size="md"] { font-size: 16px; }
+html[data-font-size="lg"] { font-size: 18px; }
+html[data-font-size="xl"] { font-size: 20px; }
+
+/* Print Stylesheet */
+@media print {
+  body {
+    background-color: var(--color-surface-card);
+    color: var(--color-true-black);
+    font-size: 12pt;
+  }
+  header, footer, nav, [data-print-hide], .no-print {
+    display: none !important;
+  }
+  .prose {
+    max-width: 100%;
+  }
+  a {
+    text-decoration: underline;
+    color: var(--color-true-black);
+  }
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+  img {
+    page-break-inside: avoid;
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "name": "penakkal-blog",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "npm run test:spacing && npm run test:contrast && npm run knip && npm run data:all && next build",
+    "start": "next start",
+    "lint": "next lint --dir src",
+    "test:spacing": "node scripts/check-spacing.mjs",
+    "test:contrast": "node scripts/verify-contrast.mjs",
+    "data:process": "node scripts/process-json.mjs",
+    "data:categorize": "node scripts/categorize.mjs",
+    "data:media": "node scripts/download-media.mjs",
+    "data:meta": "node scripts/generate-metadata.mjs",
+    "data:validate": "node scripts/validate-data.mjs",
+    "data:all": "npm run data:process && npm run data:categorize && npm run data:media && npm run data:meta && npm run data:validate",
+    "knip": "knip"
+  },
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.20",
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
+    "date-fns": "^4",
+    "framer-motion": "^12",
+    "he": "^1",
+    "html-to-text": "^9",
+    "lucide-react": "^0.500",
+    "next": "^16.3.4",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "reading-time": "^1",
+    "sanitize-html": "^2.17.7",
+    "zustand": "^5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/sanitize-html": "^2.16.1",
+    "cheerio": "^1.2.0",
+    "eslint": "^9",
+    "eslint-config-next": "^16.3.4",
+    "knip": "^6.35.1",
+    "sharp": "^0.33",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

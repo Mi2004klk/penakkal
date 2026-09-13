@@ -1,0 +1,45 @@
+
+---Downloaded files---
+The import files for: Times were successfully downloaded!
+MAX EXECUTION TIME = 30
+Files info:
+Site URL = https://penakkal.com
+Data file = /home2/tabgonli/public_html/wp-content/uploads/2021/07/demo-content-import-file_2021-07-15__17-12-49.xml
+Widget file = not defined!
+Customizer file = not defined!
+
+---Debugging---
+Begin to import the media files from the XML
+
+------
+Completed AJAX call number: 1
+
+
+---Debugging---
+Begin to import the media files from the XML
+
+---Importing content---
+
+MAX EXECUTION TIME = 300
+MEMORY LIMIT = 384M
+
+---Debugging---
+After importing the media files from the XML
+
+---Debugging---
+Begin to import the media files from the WooCommerce XML
+
+---Importing content---
+[WARNING] Could not find the author for comment #474
+
+MAX EXECUTION TIME = 300
+MEMORY LIMIT = 384M
+
+---Debugging---
+After importing the media files from the WooCommerce XML
+
+---pt-ocdi/before_widgets_import---
+
+
+---Completed---
+The Demo has been imported in 26.552158117294econds.
