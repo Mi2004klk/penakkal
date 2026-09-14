@@ -2,7 +2,8 @@
   "$schema": "https://unpkg.com/knip@5/schema-json.json",
   "ignore": [
     "source-data/**",
-    "scripts/**"
+    "scripts/**",
+    "existing_remote_backup/**"
   ],
   "next": {
     "entry": [
