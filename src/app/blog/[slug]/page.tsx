@@ -196,9 +196,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                 </div>
               </div>
               
-              <div data-print-hide className="hidden md:flex fixed bottom-[calc(4rem+env(safe-area-inset-bottom)+12px)] left-4 md:left-6 z-nav pointer-events-none items-end gap-3">
-                <div className="pointer-events-auto bg-surface-pure-white-card shadow-dropdown border border-border-default rounded-full p-2 flex flex-col items-center gap-2">
+              <div data-print-hide className="hidden md:flex fixed bottom-[calc(4rem+env(safe-area-inset-bottom)+12px)] left-4 md:left-6 z-nav pointer-events-none">
+                <div className="pointer-events-auto bg-surface-pure-white-card shadow-dropdown border border-border-default rounded-full p-2 pr-4 flex flex-row items-center gap-4">
                   <BookmarkToggle article={article} />
+                  <div className="w-px h-6 bg-border-default" aria-hidden="true"></div>
                   <ShareBar path={`/blog/${article.slug}`} title={article.title} />
                 </div>
               </div>
