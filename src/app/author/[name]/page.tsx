@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { getAllArticles } from "@/lib/articles";
+import { getAllArticles } from "@/lib/content/queries";
 import { notFound } from "next/navigation";
 
 import PageShell from "@/components/layout/PageShell";
@@ -7,6 +7,7 @@ import ArticleListClient from "@/components/article/ArticleListClient";
 import GeometricPattern from "@/components/ui/GeometricPattern";
 import JsonLd from "@/components/seo/JsonLd";
 import { getBreadcrumbSchema, getCollectionSchema } from "@/lib/seo";
+import { SITE_URL } from "@/lib/site";
 import ArticleListSkeleton from "@/components/ui/ArticleListSkeleton";
 import EmptyState from "@/components/ui/EmptyState";
 import { User } from "lucide-react";
@@ -34,6 +35,9 @@ export async function generateMetadata({ params }: { params: Promise<{ name: str
     description: `${authorName} எழுதிய இஸ்லாமிய கட்டுரைகள்`,
     robots: {
       index: authorArticles.length > 1,
+    },
+    alternates: {
+      canonical: absoluteUrl(`/author/${name}`),
     }
   };
 }
@@ -71,7 +75,7 @@ export default async function AuthorPage({
     "mainEntity": {
       "@type": "Person",
       "name": decodedName,
-      "url": `https://penakkal.com/author/${name}`
+      "url": `${SITE_URL}/author/${name}`
     }
   };
 

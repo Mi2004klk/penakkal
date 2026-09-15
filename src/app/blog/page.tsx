@@ -1,14 +1,19 @@
 import { Suspense } from "react";
-import { getAllArticles } from "@/lib/articles";
+import { getAllArticles } from "@/lib/content/queries";
 import ArticleListClient from "@/components/article/ArticleListClient";
 import { getCollectionSchema } from "@/lib/seo";
 import JsonLd from "@/components/seo/JsonLd";
 import PageShell from "@/components/layout/PageShell";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
+import { getCollectionSchema, absoluteUrl } from "@/lib/seo";
+
 export const metadata = {
   title: "கட்டுரைகள்",
   description: "அனைத்து இஸ்லாமிய கட்டுரைகளும்",
+  alternates: {
+    canonical: absoluteUrl("/blog"),
+  }
 };
 
 export default async function BlogListingPage() {

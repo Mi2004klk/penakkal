@@ -1,5 +1,5 @@
 import MetaSeparator from "@/components/ui/MetaSeparator";
-import { getAllArticles, getArticleBySlug, getAdjacentArticles } from "@/lib/articles";
+import { getAllArticles, getArticleBySlug, getAdjacentArticles } from "@/lib/content/queries";
 import { getRelatedArticles } from "@/lib/recommendations";
 import { notFound } from "next/navigation";
 import Image from "next/image";

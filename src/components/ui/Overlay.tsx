@@ -67,10 +67,12 @@ export default function Overlay({
 
         window.removeEventListener('popstate', handlePopState);
 
-        // Avoid history pollution if closed manually
-        if (window.history.state?.overlay === overlayId) {
-          window.history.back();
-        }
+        // Use requestAnimationFrame to avoid racing with router.push
+        requestAnimationFrame(() => {
+          if (window.history.state?.overlay === overlayId) {
+            window.history.back();
+          }
+        });
 
         // Focus Restore
         if (triggerRef.current) {

@@ -166,7 +166,7 @@ export default function SearchModal({ isOpen, onClose }: { isOpen: boolean; onCl
                 <div id="search-listbox" role="listbox" aria-label="தேடல் முடிவுகள்" className="flex flex-col gap-2">
                   {results.map((result, idx) => (
                     <Link
-                      key={result.id}
+                      key={result.slug}
                       href={`/blog/${result.slug}`}
                       id={`search-result-${idx}`}
                       role="option"

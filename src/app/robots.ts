@@ -1,5 +1,6 @@
 export const dynamic = "force-static";
 import { MetadataRoute } from 'next';
+import { SITE_URL } from '@/lib/site';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -7,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    host: 'https://penakkal.com',
-    sitemap: 'https://penakkal.com/sitemap.xml',
+    host: SITE_URL,
+    sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }

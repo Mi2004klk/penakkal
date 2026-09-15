@@ -1,6 +1,7 @@
 import { Article } from '@/types/article';
+import { SITE_URL } from './site';
 
-export const siteUrl = "https://penakkal.com";
+export const siteUrl = SITE_URL;
 import { formatISODate } from './dateUtils';
 
 export function absoluteUrl(path: string): string {
@@ -9,7 +10,14 @@ export function absoluteUrl(path: string): string {
   // URL encode segments to handle Tamil characters safely
   normalizedPath = normalizedPath
     .split('/')
-    .map(segment => segment ? encodeURIComponent(decodeURIComponent(segment)) : '')
+    .map(segment => {
+      if (!segment) return '';
+      try {
+        return encodeURIComponent(decodeURIComponent(segment));
+      } catch {
+        return encodeURIComponent(segment);
+      }
+    })
     .join('/');
     
   // Ensure trailing slash is present (Next.js config: trailingSlash: true)

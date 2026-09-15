@@ -1,4 +1,4 @@
-import { getAllArticles } from "@/lib/articles";
+import { getAllArticles } from "@/lib/content/queries";
 import Link from "next/link";
 import PageShell from "@/components/layout/PageShell";
 import JsonLd from "@/components/seo/JsonLd";
@@ -6,9 +6,14 @@ import { getCollectionSchema } from "@/lib/seo";
 import { getCategoryCounts } from "@/lib/categories";
 import { pluralizeTa } from "@/lib/utils";
 
+import { getCollectionSchema, absoluteUrl } from "@/lib/seo";
+
 export const metadata = {
   title: "அனைத்து வகைகள்",
   description: "இஸ்லாமிய கட்டுரைகளின் அனைத்து வகைகளும்",
+  alternates: {
+    canonical: absoluteUrl("/category"),
+  }
 };
 
 export default async function CategoryIndexPage() {

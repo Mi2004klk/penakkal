@@ -1,6 +1,6 @@
 export const dynamic = "force-static";
 import { MetadataRoute } from 'next';
-import { getAllArticles } from '@/lib/articles';
+import { getAllArticles } from '@/lib/content/queries';
 import { absoluteUrl } from '@/lib/seo';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

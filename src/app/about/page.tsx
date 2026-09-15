@@ -2,9 +2,14 @@ import PageShell from "@/components/layout/PageShell";
 import GeometricPattern from "@/components/ui/GeometricPattern";
 import BismillahBlock from "@/components/ui/BismillahBlock";
 
+import { absoluteUrl } from "@/lib/seo";
+
 export const metadata = {
   title: "எங்களை பற்றி",
   description: "பேனாக்கள் (Penakkal) - இஸ்லாமிய அறிவு தளம்",
+  alternates: {
+    canonical: absoluteUrl("/about"),
+  }
 };
 
 export default function AboutPage() {

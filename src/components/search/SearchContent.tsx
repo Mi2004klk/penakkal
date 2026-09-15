@@ -70,7 +70,7 @@ export default function SearchContent() {
             <h2 className="sr-only">தேடல் முடிவுகள்</h2>
             {results.map((item) => (
               <Link 
-                key={item.id} 
+                key={item.slug} 
                 href={`/blog/${item.slug}`}
                 className="bg-surface-card p-6 rounded-cards border border-border-default hover:border-moss transition-all flex flex-col sm:flex-row justify-between gap-4 group"
               >

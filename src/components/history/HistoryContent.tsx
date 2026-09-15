@@ -13,6 +13,7 @@ export default function HistoryContent() {
   const history = useStore((s) => s.history);
   const clearHistory = useStore((s) => s.clearHistory);
   const [mounted, setMounted] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -26,15 +27,44 @@ export default function HistoryContent() {
           <h1 className="editorial-headline text-heading m-0 inline-block wavy-underline">வாசிப்பு வரலாறு</h1>
         </div>
         {mounted && history.length > 0 && (
-          <Button 
-            onClick={clearHistory}
-            variant="alert"
-            size="sm"
-            className="flex items-center gap-2 font-ui text-body-sm font-bold"
-          >
-            <Trash2 className="w-4 h-4" />
-            வரலாற்றை அழி
-          </Button>
+          <div className="relative">
+            <Button 
+              onClick={() => setShowConfirm(true)}
+              variant="alert"
+              size="sm"
+              className="flex items-center gap-2 font-ui text-body-sm font-bold"
+            >
+              <Trash2 className="w-4 h-4" />
+              வரலாற்றை அழி
+            </Button>
+            {showConfirm && (
+              <div 
+                role="alertdialog" 
+                aria-modal="true"
+                className="absolute right-0 top-full mt-2 w-64 p-4 bg-surface-card border border-border-default rounded-cards shadow-modal z-50 flex flex-col gap-3"
+              >
+                <p className="font-ui text-body-sm font-bold text-heading text-center">வரலாற்றை அழிக்க விரும்புகிறீர்களா?</p>
+                <div className="flex gap-2">
+                  <Button 
+                    onClick={() => { clearHistory(); setShowConfirm(false); }}
+                    variant="alert"
+                    size="sm"
+                    className="flex-1"
+                  >
+                    ஆம்
+                  </Button>
+                  <Button 
+                    onClick={() => setShowConfirm(false)}
+                    variant="ghost"
+                    size="sm"
+                    className="flex-1"
+                  >
+                    ரத்து
+                  </Button>
+                </div>
+              </div>
+            )}
+          </div>
         )}
       </div>
       

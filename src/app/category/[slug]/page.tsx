@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { getAllArticles, getArticlesByCategory } from "@/lib/articles";
+import { getAllArticles, getArticlesByCategory, getNavCategories } from "@/lib/content/queries";
 import { notFound } from "next/navigation";
 
 import PageShell from "@/components/layout/PageShell";
@@ -11,7 +11,6 @@ import ArticleListSkeleton from "@/components/ui/ArticleListSkeleton";
 import EmptyState from "@/components/ui/EmptyState";
 import { FolderOpen } from "lucide-react";
 import { pluralizeTa } from "@/lib/utils";
-import { getNavCategories } from "@/lib/articles";
 
 export async function generateStaticParams() {
   const articles = await getAllArticles();
@@ -31,6 +30,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${categoryName} கட்டுரைகள்`,
     description: `${categoryName} தொடர்பான இஸ்லாமிய கட்டுரைகள்`,
+    alternates: {
+      canonical: absoluteUrl(`/category/${slug}`),
+    }
   };
 }
 

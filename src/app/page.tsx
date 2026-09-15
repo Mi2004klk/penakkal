@@ -1,7 +1,7 @@
 import MetaSeparator from "@/components/ui/MetaSeparator";
 import Link from "next/link";
 import Image from "next/image";
-import { getAllArticles, getFeaturedArticles, getLongreadArticles } from "@/lib/articles";
+import { getAllArticles, getFeaturedArticles, getLongreadArticles } from "@/lib/content/queries";
 import { cleanAuthor, formatDate } from "@/lib/utils";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -17,6 +17,14 @@ import IslamicDivider from "@/components/ui/IslamicDivider";
 import CategoryBadge from "@/components/ui/CategoryBadge";
 import { buttonStyles } from "@/components/ui/Button";
 import ReadingTime from "@/components/ui/ReadingTime";
+
+import { absoluteUrl } from "@/lib/seo";
+
+export const metadata = {
+  alternates: {
+    canonical: absoluteUrl("/"),
+  }
+};
 
 export default async function Home() {
   const allArticles = await getAllArticles();

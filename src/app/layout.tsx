@@ -32,9 +32,10 @@ import ScrollToTop from "@/components/ui/ScrollToTop";
 import JsonLd from "@/components/seo/JsonLd";
 import { getOrganizationSchema, getWebSiteSchema, absoluteUrl } from "@/lib/seo";
 import Script from "next/script";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://penakkal.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
     template: "%s | பேனாக்கள்",
     default: "பேனாக்கள் — இஸ்லாமிய தமிழ் வலைப்பூ",
@@ -52,7 +53,6 @@ export const metadata: Metadata = {
     images: ["/og-default.png"],
   },
   alternates: {
-    canonical: absoluteUrl("/"),
     types: {
       'application/rss+xml': '/feed.xml',
     },
@@ -77,8 +77,6 @@ export const viewport: Viewport = {
   themeColor: "#fcf7ed", // Default, will be overwritten by theme-init script if dark
 };
 
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { STORAGE_KEY } from "@/store/useStore";
 
 export default function RootLayout({
@@ -138,8 +136,6 @@ export default function RootLayout({
           </div>
         </ThemeProvider>
         <Script defer data-domain="penakkal.com" src="https://plausible.io/js/script.js" strategy="afterInteractive" />
-        <Analytics />
-        <SpeedInsights />
       </body>
     </html>
   );

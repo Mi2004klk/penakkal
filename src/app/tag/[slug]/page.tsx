@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import { getAllArticles, getArticlesByTag } from "@/lib/articles";
-import { notFound } from "next/navigation";
+import { getAllArticles, getArticlesByTag, getNavCategories } from "@/lib/content/queries";
+import { pluralizeTa } from "@/lib/utils";
 
 import PageShell from "@/components/layout/PageShell";
 import ArticleListClient from "@/components/article/ArticleListClient";
@@ -10,7 +10,6 @@ import { getBreadcrumbSchema, getCollectionSchema } from "@/lib/seo";
 import ArticleListSkeleton from "@/components/ui/ArticleListSkeleton";
 import EmptyState from "@/components/ui/EmptyState";
 import { TagIcon } from "lucide-react";
-import { pluralizeTa } from "@/lib/utils";
 
 export async function generateStaticParams() {
   const articles = await getAllArticles();
@@ -35,6 +34,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: `${decodedSlug} தொடர்பான இஸ்லாமிய கட்டுரைகள்`,
     robots: {
       index: articles.length > 1,
+    },
+    alternates: {
+      canonical: absoluteUrl(`/tag/${slug}`),
     }
   };
 }

@@ -71,6 +71,15 @@ const matrix = [
   { theme: 'dark', bg: '#008236', fg: '#ffffff', name: 'moss badge / pure-white label', min: 4.5 }
 ];
 
+try {
+  const css = fs.readFileSync(path.join(process.cwd(), 'src', 'app', 'globals.css'), 'utf8');
+  // Simple extraction of CSS variables if needed, otherwise fallback to matrix.
+  // In a robust implementation, this would dynamically parse the CSS file to find
+  // matching variables for bg/fg definitions.
+} catch (e) {
+  console.warn("Could not read globals.css, using static fallback matrix");
+}
+
 let failed = false;
 
 console.log("Validating WCAG Contrast...");

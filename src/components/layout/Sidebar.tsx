@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useStore } from "@/store/useStore";
 import { Moon } from "lucide-react";
 import HijriDate from "../ui/HijriDate";
 import SidebarSearchButton from "./SidebarSearchButton";

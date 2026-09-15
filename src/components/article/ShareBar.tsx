@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import WhatsAppIcon from "../icons/WhatsAppIcon";
 import FacebookIcon from "../icons/FacebookIcon";
 import XIcon from "../icons/XIcon";
+import { SITE_URL } from "@/lib/site";
 
 export default function ShareBar({ path, title }: { path: string; title: string }) {
   const [copied, setCopied] = useState(false);
@@ -18,7 +19,7 @@ export default function ShareBar({ path, title }: { path: string; title: string 
   }, []);
 
   const getFullUrl = () => {
-    return typeof window !== 'undefined' ? `${window.location.origin}${path}` : `https://penakkal.com${path}`;
+    return typeof window !== 'undefined' ? `${window.location.origin}${path}` : `${SITE_URL}${path}`;
   };
 
   const handleShare = async () => {

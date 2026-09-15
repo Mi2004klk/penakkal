@@ -1,0 +1,372 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  name         String
+  passwordHash String
+  role         Role       @default(EDITOR)
+  isActive     Boolean    @default(true)
+  totpSecret   String?
+  lastLoginAt  DateTime?
+  sessions     Session[]
+  audits       AuditLog[]
+  uploads      Media[]    @relation("uploads")
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model Session {
+  id        String   @id
+  userId    String
+  expires   DateTime
+  ip        String?
+  userAgent String?
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Author {
+  id            String    @id @default(cuid())
+  slug          String    @unique
+  nameTamil     String
+  nameEnglish   String?
+  bioTamil      String?
+  avatarMediaId String?
+  social        Json?
+  isFeatured    Boolean   @default(false)
+  articles      Article[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Category {
+  id             String            @id @default(cuid())
+  slug           String            @unique
+  nameTamil      String
+  nameEnglish    String?
+  description    String?
+  icon           String?
+  color          String?
+  parentId       String?
+  sortOrder      Int               @default(0)
+  isActive       Boolean           @default(true)
+  seoTitle       String?
+  seoDescription String?
+  ogImageMediaId String?
+  articles       ArticleCategory[]
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+}
+
+model Tag {
+  id        String       @id @default(cuid())
+  slug      String       @unique
+  name      String
+  articles  ArticleTag[]
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+}
+
+model Article {
+  id             String            @id @default(cuid())
+  wpId           Int?              @unique
+  slug           String            @unique
+  title          String
+  excerpt        String?
+  contentJson    Json?
+  contentHtml    String?
+  refs           Json?
+  lang           String            @default("ta")
+  status         ArticleStatus     @default(DRAFT)
+  publishedAt    DateTime?
+  scheduledAt    DateTime?
+  readingTime    Int?
+  wordCount      Int?
+  authorId       String
+  coverMediaId   String?
+  coverAlt       String?
+  coverCaption   String?
+  ogImageMediaId String?
+  seoTitle       String?
+  seoDescription String?
+  canonicalUrl   String?
+  noindex        Boolean           @default(false)
+  isFeatured     Boolean           @default(false)
+  featuredOrder  Int?
+  viewCount      Int               @default(0)
+  createdById    String
+  updatedById    String?
+  categories     ArticleCategory[]
+  tags           ArticleTag[]
+  revisions      ArticleRevision[]
+  author         Author            @relation(fields: [authorId], references: [id])
+  coverMedia     Media?            @relation("cover", fields: [coverMediaId], references: [id])
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+
+  @@index([status, publishedAt(sort: Desc)])
+  @@index([slug])
+  @@index([authorId])
+  @@index([isFeatured])
+}
+
+model ArticleCategory {
+  articleId  String
+  categoryId String
+  isPrimary  Boolean  @default(false)
+  article    Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([articleId, categoryId])
+}
+
+model ArticleTag {
+  articleId String
+  tagId     String
+  article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  tag       Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([articleId, tagId])
+}
+
+model ArticleRevision {
+  id         String   @id @default(cuid())
+  articleId  String
+  docJson    Json
+  docHtml    String
+  title      String
+  excerpt    String?
+  editedById String
+  label      String?
+  createdAt  DateTime @default(now())
+  article    Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+
+  @@index([articleId, createdAt(sort: Desc)])
+}
+
+model MediaFolder {
+  id       String  @id @default(cuid())
+  name     String
+  slug     String
+  parentId String?
+  path     String  @unique
+}
+
+model Media {
+  id           String       @id @default(cuid())
+  checksum     String       @unique
+  storageKey   String       @unique
+  filename     String
+  originalName String
+  mimeType     String
+  size         Int
+  width        Int?
+  height       Int?
+  altText      String?
+  caption      String?
+  credit       String?
+  title        String?
+  focalX       Float        @default(0.5)
+  focalY       Float        @default(0.5)
+  variants     Json?
+  folderId     String?
+  uploadedById String?
+  status       MediaStatus  @default(ACTIVE)
+  trashedAt    DateTime?
+  usages       MediaUsage[]
+  uploadedBy   User?        @relation("uploads", fields: [uploadedById], references: [id])
+  articlesCover Article[]   @relation("cover")
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  @@index([folderId])
+  @@index([status])
+  @@index([mimeType])
+}
+
+model MediaUsage {
+  id         String   @id @default(cuid())
+  mediaId    String
+  entityType String
+  entityId   String
+  field      String
+  createdAt  DateTime @default(now())
+  media      Media    @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+
+  @@unique([mediaId, entityType, entityId, field])
+}
+
+model Page {
+  id             String      @id @default(cuid())
+  slug           String      @unique
+  title          String
+  status         ArticleStatus @default(DRAFT)
+  seoTitle       String?
+  seoDescription String?
+  ogImageMediaId String?
+  blocks         PageBlock[]
+  publishedAt    DateTime?
+  updatedById    String?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+}
+
+model PageBlock {
+  id        String  @id @default(cuid())
+  pageId    String
+  type      String
+  data      Json
+  sortOrder Int     @default(0)
+  isActive  Boolean @default(true)
+  page      Page    @relation(fields: [pageId], references: [id], onDelete: Cascade)
+
+  @@index([pageId, sortOrder])
+}
+
+model Menu {
+  id       String     @id @default(cuid())
+  slug     String     @unique
+  location String
+  items    MenuItem[]
+}
+
+model MenuItem {
+  id         String  @id @default(cuid())
+  menuId     String
+  parentId   String?
+  label      String
+  url        String?
+  pageId     String?
+  categoryId String?
+  articleId  String?
+  sortOrder  Int     @default(0)
+  isActive   Boolean @default(true)
+  cssClass   String?
+  menu       Menu    @relation(fields: [menuId], references: [id], onDelete: Cascade)
+}
+
+model Setting {
+  key         String   @id
+  group       String
+  value       Json
+  updatedById String?
+  updatedAt   DateTime @updatedAt
+}
+
+model Hadith {
+  id               String  @id @default(cuid())
+  arabicText       String
+  tamilTranslation String
+  sourceRef        String
+  sortOrder        Int
+  isActive         Boolean
+}
+
+model Faq {
+  id       String  @id @default(cuid())
+  question String
+  answer   String
+  category String?
+  sortOrder Int
+  isActive  Boolean
+}
+
+model Testimonial {
+  id            String  @id @default(cuid())
+  quote         String
+  personName    String
+  personTitle   String?
+  avatarMediaId String?
+  sortOrder     Int
+  isActive      Boolean
+}
+
+model Banner {
+  id           String    @id @default(cuid())
+  title        String
+  body         String?
+  ctaLabel     String?
+  ctaUrl       String?
+  imageMediaId String?
+  placement    String
+  startsAt     DateTime?
+  endsAt       DateTime?
+  isActive     Boolean
+}
+
+model Redirect {
+  id          String  @id @default(cuid())
+  source      String  @unique
+  destination String
+  statusCode  Int     @default(301)
+  note        String?
+  createdById String?
+  hits        Int     @default(0)
+  isActive    Boolean @default(true)
+}
+
+model NewsletterSubscriber {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  status       String    @default("PENDING")
+  tokenConfirm String    @unique
+  tokenUnsub   String    @unique
+  confirmedAt  DateTime?
+}
+
+model ContactMessage {
+  id       String  @id @default(cuid())
+  name     String
+  email    String
+  subject  String?
+  message  String
+  isRead   Boolean @default(false)
+  ip       String?
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  action     String
+  entityType String
+  entityId   String?
+  diff       Json?
+  ip         String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([entityType, entityId])
+  @@index([createdAt])
+}
+
+enum Role {
+  OWNER
+  ADMIN
+  EDITOR
+  AUTHOR
+  VIEWER
+}
+
+enum ArticleStatus {
+  DRAFT
+  REVIEW
+  SCHEDULED
+  PUBLISHED
+  ARCHIVED
+}
+
+enum MediaStatus {
+  ACTIVE
+  TRASHED
+  PURGED
+}

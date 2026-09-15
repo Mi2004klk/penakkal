@@ -1,4 +1,5 @@
 import { Mail } from "lucide-react";
+import { CONTACT_EMAIL } from "@/lib/site";
 
 export default function NewsletterSignup() {
   return (
@@ -18,11 +19,11 @@ export default function NewsletterSignup() {
         
         <div className="flex justify-center">
           <a 
-            href="mailto:contact@penakkal.com?subject=Newsletter%20Subscription" 
+            href={`mailto:${CONTACT_EMAIL}?subject=Newsletter%20Subscription`}
             className="inline-flex items-center gap-2 text-text-link hover:text-heading transition-colors font-bold text-lg border border-border-default hover:border-moss rounded-buttons px-6 py-3 bg-surface-page"
           >
             <Mail className="w-5 h-5" />
-            contact@penakkal.com
+            {CONTACT_EMAIL}
           </a>
         </div>
       </div>

@@ -19,7 +19,7 @@ export default function HighlightText({ text, highlight }: HighlightTextProps) {
   return (
     <span>
       {parts.map((part, i) =>
-        regex.test(part) ? (
+        part.toLowerCase() === highlight.toLowerCase() ? (
           <span key={i} className="bg-lime-sprout/30 text-heading px-1 rounded-buttons font-medium">
             {part}
           </span>

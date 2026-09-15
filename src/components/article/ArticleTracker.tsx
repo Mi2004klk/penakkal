@@ -8,6 +8,9 @@ export default function ArticleTracker({ slug, title }: { slug: string; title: s
   const hasTracked = useRef(false);
 
   useEffect(() => {
+    // Reset tracker when article changes (fixes next.js client navigation bugs)
+    hasTracked.current = false;
+
     const handleScroll = () => {
       if (hasTracked.current) return;
       

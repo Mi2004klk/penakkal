@@ -1,8 +1,9 @@
 export const dynamic = "force-static";
 
 import { absoluteUrl, siteUrl } from "@/lib/seo";
+import { CONTACT_EMAIL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/site";
 import { formatRSSDate } from "@/lib/dateUtils";
-import { getAllArticles } from "@/lib/articles";
+import { getAllArticles } from "@/lib/content/queries";
 import { Article } from "@/types/article";
 
 export async function GET() {
@@ -12,13 +13,13 @@ export async function GET() {
   const feed = `<?xml version="1.0" encoding="utf-8"?>
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-      <title>பேனாக்கள் — இஸ்லாமிய தமிழ் வலைப்பூ</title>
+      <title>${SITE_NAME}</title>
       <link>${siteUrl}</link>
-      <description>தமிழ் முஸ்லிம்களுக்கான இஸ்லாமிய அறிவு வலைப்பூ. குர்ஆன், ஹதீஸ், மற்றும் இஸ்லாமிய வரலாற்றை தேடிக் கற்கும் தளம்.</description>
+      <description>${SITE_DESCRIPTION}</description>
       <language>ta</language>
       <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
       <ttl>60</ttl>
-      <atom:link href="${siteUrl}/feed.xml" rel="self" type="application/rss+xml"/>
+      <atom:link href="${siteUrl}/feed.xml/" rel="self" type="application/rss+xml"/>
       ${latestArticles
         .map(
           (article: Article) => `
@@ -30,7 +31,7 @@ export async function GET() {
           <description><![CDATA[${article.excerpt}]]></description>
           <category><![CDATA[${article.categoryTamil || article.category}]]></category>
           ${article.tags && article.tags.length > 0 ? article.tags.map((tag: string) => `<category><![CDATA[${tag}]]></category>`).join('\n          ') : ""}
-          ${article.author ? `<author>noreply@penakkal.com (${article.author})</author>` : ""}
+          ${article.author ? `<author>${CONTACT_EMAIL} (${article.author})</author>` : ""}
           ${article.coverImage ? `<enclosure url="${siteUrl}${article.coverImage}" type="image/webp" />` : ""}
         </item>`
         )
